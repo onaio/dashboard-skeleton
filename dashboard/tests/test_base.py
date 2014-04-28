@@ -33,6 +33,8 @@ class TestBase(unittest.TestCase):
         Base.metadata.bind = engine
         Base.metadata.drop_all()
         Base.metadata.create_all()
+        # setup request
+        self.request = testing.DummyRequest()
 
     def tearDown(self):
         DBSession.remove()
