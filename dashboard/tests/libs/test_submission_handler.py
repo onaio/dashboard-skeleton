@@ -47,10 +47,16 @@ class TestSubmissionHandlerManager(unittest.TestCase):
 
 
 class TestSubmissionHandler(unittest.TestCase):
-    def test_raise_not_implemented(self):
+    def test_raise_not_implemented_on_can_handle(self):
         self.assertRaises(NotImplementedError, SubmissionHandler.can_handle)
+
+    def test_raise_not_implemented_on_call(self):
+        self.assertRaises(NotImplementedError, SubmissionHandler().__call__)
 
 
 class TestGenericSubmissionHandler(unittest.TestCase):
     def test_always_returns_true_to_can_handle(self):
         self.assertTrue(GenericSubmissionHandler.can_handle("anything"))
+
+    def test_always_return_true_to_call(self):
+        self.assertTrue(GenericSubmissionHandler().__call__({}))

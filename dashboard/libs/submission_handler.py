@@ -32,6 +32,9 @@ class SubmissionHandler(object):
     def can_handle(*args, **kwargs):
         raise NotImplementedError("You must implement can_handle")
 
+    def __call__(self, *args, **kwargs):
+        raise NotImplementedError("You must implement can_handle")
+
 
 class GenericSubmissionHandler(object):
     """
@@ -39,6 +42,9 @@ class GenericSubmissionHandler(object):
     """
     @staticmethod
     def can_handle(json_payload):
+        return True
+
+    def __call__(self, json_payload):
         return True
 
 submission_handler_manager = SubmissionHandlerManager()
