@@ -38,6 +38,13 @@ class TestSubmissionHandlerManager(unittest.TestCase):
         handler = handler_manager.find_handler({})
         self.assertEqual(handler, Handler2)
 
+    def test_clear(self):
+        handler_manager = SubmissionHandlerManager()
+        handler_manager.add_handler(1)
+        self.assertEqual(len(handler_manager), 1)
+        handler_manager.clear()
+        self.assertEqual(len(handler_manager), 0)
+
 
 class TestSubmissionHandler(unittest.TestCase):
     def test_raise_not_implemented(self):

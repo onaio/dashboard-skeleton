@@ -20,6 +20,9 @@ class SubmissionHandlerManager(list):
         else:
             raise NoAppropriateHandlerException
 
+    def clear(self):
+        self[0:] = []
+
 
 class SubmissionHandler(object):
     """
