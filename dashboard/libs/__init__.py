@@ -1,1 +1,3 @@
-from submission_handler_manager import SubmissionHandlerManager
+from submission_handler import (
+    SubmissionHandlerManager, SubmissionHandler, GenericSubmissionHandler,
+    SubmissionHandlerError,)

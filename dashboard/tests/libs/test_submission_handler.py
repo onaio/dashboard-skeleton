@@ -1,6 +1,7 @@
 import unittest
 
-from dashboard.libs import SubmissionHandlerManager
+from dashboard.libs import (
+    SubmissionHandlerManager, SubmissionHandler, GenericSubmissionHandler,)
 
 
 class TestSubmissionHandlerManager(unittest.TestCase):
@@ -36,3 +37,13 @@ class TestSubmissionHandlerManager(unittest.TestCase):
         handler_manager.add_handler(self.Handler1)
         handler = handler_manager.find_handler({})
         self.assertEqual(handler, Handler2)
+
+
+class TestSubmissionHandler(unittest.TestCase):
+    def test_raise_not_implemented(self):
+        self.assertRaises(NotImplementedError, SubmissionHandler.can_handle)
+
+
+class TestGenericSubmissionHandler(unittest.TestCase):
+    def test_always_returns_true_to_can_handle(self):
+        self.assertTrue(GenericSubmissionHandler.can_handle("anything"))
