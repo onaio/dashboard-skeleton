@@ -15,7 +15,30 @@ from zope.sqlalchemy import ZopeTransactionExtension
 
 
 DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
-Base = declarative_base()
+
+
+class BaseModel(object):
+    @classmethod
+    def newest(cls):
+        return DBSession.query(cls).order_by(desc(cls.id)).first()
+
+    @classmethod
+    def get(cls, *criterion):
+        return DBSession.query(cls).filter(*criterion).one()
+
+    @classmethod
+    def all(cls, *criterion):
+        return DBSession.query(cls).filter(*criterion).all()
+
+    @classmethod
+    def count(cls, *criterion):
+        return DBSession.query(cls).filter(*criterion).count()
+
+    def save(self):
+        DBSession.add(self)
+        DBSession.flush()
+
+Base = declarative_base(cls=BaseModel)
 
 
 class RootFactory(object):
