@@ -14,7 +14,6 @@ from dashboard.models.base import (
     )
 from dashboard.libs.submission_handler import (
     submission_handler_manager)
-from dashboard.models.submission import SubmissionFactory
 
 
 def main(global_config, **settings):
