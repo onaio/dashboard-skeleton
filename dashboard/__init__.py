@@ -51,5 +51,5 @@ def includeme(config):
     config.add_static_view('static', 'dashboard:static', cache_max_age=3600)
     config.add_route('default', '/')
     config.add_route(
-        'submissions', '/submissions/*traverse', factory=SubmissionFactory)
+        'submissions', '/submissions/*traverse')
     config.scan()

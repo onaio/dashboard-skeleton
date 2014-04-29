@@ -9,8 +9,6 @@ from dashboard.libs.submission_handler import (
     NoAppropriateHandlerException,
     submission_handler_manager,
     SubmissionHandlerError)
-from dashboard.models import (
-    SubmissionFactory)
 
 
 @view_defaults(route_name='submissions')
@@ -18,7 +16,6 @@ class Submissions(BaseView):
     @view_config(
         name='',
         request_method='POST',
-        context=SubmissionFactory,
         permission=NO_PERMISSION_REQUIRED)
     def json_post(self):
         payload = self.request.body
