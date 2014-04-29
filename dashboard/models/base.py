@@ -10,6 +10,7 @@ from sqlalchemy.orm import (
     scoped_session,
     sessionmaker,
     )
+from sqlalchemy.sql.expression import desc
 
 from zope.sqlalchemy import ZopeTransactionExtension
 
