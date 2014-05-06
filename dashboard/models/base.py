@@ -42,7 +42,7 @@ class BaseModel(object):
 Base = declarative_base(cls=BaseModel)
 
 
-class RootFactory(object):
+class BaseRootFactory(object):
     __acl__ = [
         (Allow, 'g:su', ALL_PERMISSIONS),
         (Allow, Authenticated, 'authenticated'),
@@ -60,4 +60,5 @@ class BaseModelFactory(object):
     @property
     def __parent__(self):
         # set root factory as parent to inherit root's acl
-        return RootFactory(self.request)
+        # todo: we should use whatever default root factory is configured
+        return BaseRootFactory(self.request)
