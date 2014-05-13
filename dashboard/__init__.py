@@ -47,6 +47,7 @@ def main(global_config, **settings):
 def includeme(config):
     config.include('pyramid_jinja2')
     config.add_jinja2_search_path("dashboard:templates")
+    config.commit()  # commit to allow access to jinja environment
     config.add_static_view('static', 'dashboard:static', cache_max_age=3600)
     config.add_route('default', '/')
     config.add_route(
