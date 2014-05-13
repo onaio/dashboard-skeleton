@@ -1,7 +1,9 @@
 import re
 import datetime
 
-from pyramid.i18n import TranslationStringFactory
+from babel.dates import (format_date as babel_format_date,
+                         format_time as babel_format_time)
+from pyramid.i18n import TranslationStringFactory, get_localizer
 
 
 translation_string_factory = TranslationStringFactory('Dashboard')
@@ -24,3 +26,17 @@ def date_string_to_time(date_string):
     date_string = remove_time_zone(date_string)
     return datetime.datetime.strptime(
         date_string, '%Y-%m-%dT%H:%M:%S.%f').time()
+
+
+def tuple_to_dict_list(key_tuple, value_tuples):
+    return [dict(zip(key_tuple, c)) for c in value_tuples]
+
+
+def format_date(value, request, date_format='long'):
+    localizer = get_localizer(request)
+    return babel_format_date(value, date_format, locale=localizer.locale_name)
+
+
+def format_time(value, request, time_format='short'):
+    localizer = get_localizer(request)
+    return babel_format_time(value, time_format, locale=localizer.locale_name)

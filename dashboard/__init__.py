@@ -6,8 +6,8 @@ from pyramid.authorization import ACLAuthorizationPolicy
 from pyramid.session import UnencryptedCookieSessionFactoryConfig
 from sqlalchemy import engine_from_config
 
+from dashboard.libs.utils import format_date, format_time
 from dashboard.security import group_finder, pwd_context
-
 from dashboard.models.base import (
     DBSession,
     Base,
@@ -48,6 +48,8 @@ def includeme(config):
     config.include('pyramid_jinja2')
     config.add_jinja2_search_path("dashboard:templates")
     config.commit()  # commit to allow access to jinja environment
+    config.get_jinja2_environment().filters['format_date'] = format_date
+    config.get_jinja2_environment().filters['format_time'] = format_time
     config.add_static_view('static', 'dashboard:static', cache_max_age=3600)
     config.add_route('default', '/')
     config.add_route(

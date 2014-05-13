@@ -1,6 +1,8 @@
 import unittest
 import datetime
 
+from pyramid import testing
+
 from dashboard.libs import utils
 
 
@@ -22,3 +24,15 @@ class TestUtils(unittest.TestCase):
         date_string = '2014-04-29T10:35:00.000+03'
         result = utils.date_string_to_time(date_string)
         self.assertEqual(datetime.time(10, 35, 00), result)
+
+    def test_format_date(self):
+        value = datetime.date(2014, 04, 03)
+        request = testing.DummyRequest()
+        result = utils.format_date(value, request)
+        self.assertEqual(result, 'April 3, 2014')
+
+    def test_format_time(self):
+        value = datetime.time(13, 15, 03)
+        request = testing.DummyRequest()
+        result = utils.format_time(value, request)
+        self.assertEqual(result, '1:15 PM')
