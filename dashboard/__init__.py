@@ -25,7 +25,7 @@ def main(global_config, **settings):
     session_factory = UnencryptedCookieSessionFactoryConfig(
         settings['secret_key'])
     config = Configurator(settings=settings,
-                          root_factory='dashboard.models.base.RootFactory',
+                          root_factory='dashboard.models.base.BaseRootFactory',
                           session_factory=session_factory)
     config.set_authentication_policy(
         AuthTktAuthenticationPolicy(settings['secret_key'],
