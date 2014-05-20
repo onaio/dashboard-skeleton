@@ -6,7 +6,7 @@ from pyramid.authorization import ACLAuthorizationPolicy
 from pyramid.session import UnencryptedCookieSessionFactoryConfig
 from sqlalchemy import engine_from_config
 
-from dashboard.libs.utils import format_date, format_time
+from dashboard.libs.utils import format_date, format_time, format_decimal
 from dashboard.security import group_finder, pwd_context
 from dashboard.models.base import (
     DBSession,
@@ -50,6 +50,7 @@ def includeme(config):
     config.commit()  # commit to allow access to jinja environment
     config.get_jinja2_environment().filters['format_date'] = format_date
     config.get_jinja2_environment().filters['format_time'] = format_time
+    config.get_jinja2_environment().filters['format_decimal'] = format_decimal
     config.add_static_view('static', 'dashboard:static', cache_max_age=3600)
     config.add_route('default', '/')
     config.add_route(

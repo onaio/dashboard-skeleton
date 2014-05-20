@@ -36,3 +36,9 @@ class TestUtils(unittest.TestCase):
         request = testing.DummyRequest()
         result = utils.format_time(value, request)
         self.assertEqual(result, '1:15 PM')
+
+    def test_format_decimal(self):
+        value = 0.123632
+        request = testing.DummyRequest()
+        result = utils.format_decimal(value, request)
+        self.assertEqual(result, '0.124')

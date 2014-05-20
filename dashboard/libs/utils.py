@@ -3,6 +3,7 @@ import datetime
 
 from babel.dates import (format_date as babel_format_date,
                          format_time as babel_format_time)
+from babel.numbers import format_decimal as babel_format_decimal
 from pyramid.i18n import TranslationStringFactory, get_localizer
 
 
@@ -40,3 +41,9 @@ def format_date(value, request, date_format='long'):
 def format_time(value, request, time_format='short'):
     localizer = get_localizer(request)
     return babel_format_time(value, time_format, locale=localizer.locale_name)
+
+
+def format_decimal(value, request, number_format='#,##0.###;-#'):
+    localizer = get_localizer(request)
+    return babel_format_decimal(
+        value, format=number_format, locale=localizer.locale_name)
