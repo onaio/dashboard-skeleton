@@ -27,7 +27,7 @@ requires = [
 ]
 
 setup(name='Dashboard',
-      version='0.1.1a',
+      version='0.1.1b',
       description='Dashboard',
       long_description=README + '\n\n' + CHANGES,
       classifiers=[
