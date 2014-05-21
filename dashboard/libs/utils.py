@@ -15,18 +15,27 @@ def remove_time_zone(date_string):
     return TIMEZONE_RE.sub('', date_string)
 
 
-def date_string_to_date(date_string):
+def date_string_to_datetime(date_string):
     # strip out the timezone i.e. +03[00]
     date_string = remove_time_zone(date_string)
     return datetime.datetime.strptime(
-        date_string, '%Y-%m-%dT%H:%M:%S.%f').date()
+        date_string, '%Y-%m-%dT%H:%M:%S.%f')
+
+
+def date_string_to_date(date_string):
+    return date_string_to_datetime(date_string).date()
 
 
 def date_string_to_time(date_string):
-    # strip out the timezone i.e. +03[00]
-    date_string = remove_time_zone(date_string)
-    return datetime.datetime.strptime(
-        date_string, '%Y-%m-%dT%H:%M:%S.%f').time()
+    return date_string_to_datetime(date_string).time()
+
+
+def date_string_to_month(date_string):
+    """
+    Set the date to the first day of the month
+    """
+    date = date_string_to_datetime(date_string)
+    return datetime.date(date.year, date.month, 01)
 
 
 def tuple_to_dict_list(key_tuple, value_tuples):
