@@ -29,7 +29,7 @@ class SubmissionHandler(object):
     Abstract submission handler
     """
     @staticmethod
-    def can_handle(*args, **kwargs):
+    def can_handle(json_payload):
         raise NotImplementedError("You must implement can_handle")
 
     def __call__(self, *args, **kwargs):

@@ -9,32 +9,33 @@ from pyramid.i18n import TranslationStringFactory, get_localizer
 
 translation_string_factory = TranslationStringFactory('Dashboard')
 TIMEZONE_RE = re.compile(r'\+.+$')
+default_date_format = '%Y-%m-%dT%H:%M:%S.%f'
 
 
 def remove_time_zone(date_string):
     return TIMEZONE_RE.sub('', date_string)
 
 
-def date_string_to_datetime(date_string):
+def date_string_to_datetime(date_string, date_format=default_date_format):
     # strip out the timezone i.e. +03[00]
     date_string = remove_time_zone(date_string)
     return datetime.datetime.strptime(
-        date_string, '%Y-%m-%dT%H:%M:%S.%f')
+        date_string, date_format)
 
 
-def date_string_to_date(date_string):
-    return date_string_to_datetime(date_string).date()
+def date_string_to_date(date_string, date_format=default_date_format):
+    return date_string_to_datetime(date_string, date_format).date()
 
 
-def date_string_to_time(date_string):
-    return date_string_to_datetime(date_string).time()
+def date_string_to_time(date_string, date_format=default_date_format):
+    return date_string_to_datetime(date_string, date_format).time()
 
 
-def date_string_to_month(date_string):
+def date_string_to_month(date_string, date_format=default_date_format):
     """
     Set the date to the first day of the month
     """
-    date = date_string_to_datetime(date_string)
+    date = date_string_to_datetime(date_string, date_format)
     return datetime.date(date.year, date.month, 01)
 
 

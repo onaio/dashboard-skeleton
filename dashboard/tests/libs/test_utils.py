@@ -20,14 +20,32 @@ class TestUtils(unittest.TestCase):
         result = utils.date_string_to_datetime(date_string)
         self.assertEqual(datetime.datetime(2014, 04, 29, 10, 35), result)
 
+    def test_date_string_to_datetime_w_format(self):
+        date_string = '2014-04-29T10:35'
+        format = '%Y-%m-%dT%H:%M'
+        result = utils.date_string_to_datetime(date_string, format)
+        self.assertEqual(datetime.datetime(2014, 04, 29, 10, 35), result)
+
     def test_date_string_to_date(self):
         date_string = '2014-04-29T10:35:00.000+03'
         result = utils.date_string_to_date(date_string)
         self.assertEqual(datetime.date(2014, 04, 29), result)
 
+    def test_date_string_to_date_w_format(self):
+        date_string = '2014-04-29'
+        format = '%Y-%m-%d'
+        result = utils.date_string_to_date(date_string, format)
+        self.assertEqual(datetime.date(2014, 04, 29), result)
+
     def test_date_string_to_time(self):
         date_string = '2014-04-29T10:35:00.000+03'
         result = utils.date_string_to_time(date_string)
+        self.assertEqual(datetime.time(10, 35, 00), result)
+
+    def test_date_string_to_time_w_format(self):
+        date_string = '10:35:00.000+03'
+        format = '%H:%M:%S.%f'
+        result = utils.date_string_to_time(date_string, format)
         self.assertEqual(datetime.time(10, 35, 00), result)
 
     def test_date_string_to_month(self):
