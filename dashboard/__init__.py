@@ -11,7 +11,8 @@ from dashboard.libs.utils import (
     format_time,
     format_decimal,
     date_string_to_datetime,
-    format_percent)
+    format_percent,
+    format_number)
 from dashboard.security import group_finder, pwd_context
 from dashboard.models.base import (
     DBSession,
@@ -57,6 +58,7 @@ def includeme(config):
     config.get_jinja2_environment().filters['format_time'] = format_time
     config.get_jinja2_environment().filters['format_decimal'] = format_decimal
     config.get_jinja2_environment().filters['format_percent'] = format_percent
+    config.get_jinja2_environment().filters['format_number'] = format_number
     config.get_jinja2_environment().filters['datetime'] = (
         date_string_to_datetime)
     config.add_static_view('static', 'dashboard:static', cache_max_age=3600)

@@ -4,7 +4,8 @@ import datetime
 from babel.dates import (format_date as babel_format_date,
                          format_time as babel_format_time)
 from babel.numbers import (format_decimal as babel_format_decimal,
-                           format_percent as babel_format_percent)
+                           format_percent as babel_format_percent,
+                           format_number as babel_format_number)
 from pyramid.i18n import TranslationStringFactory, get_localizer
 
 
@@ -64,3 +65,9 @@ def format_percent(value, request, percent_format='#,##0.##%;-#'):
     localizer = get_localizer(request)
     return babel_format_percent(
         value, format=percent_format, locale=localizer.locale_name)
+
+
+def format_number(value, request):
+    localizer = get_localizer(request)
+    return babel_format_number(
+        value, locale=localizer.locale_name)
