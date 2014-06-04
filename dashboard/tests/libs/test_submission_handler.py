@@ -48,7 +48,8 @@ class TestSubmissionHandlerManager(unittest.TestCase):
 
 class TestSubmissionHandler(unittest.TestCase):
     def test_raise_not_implemented_on_can_handle(self):
-        self.assertRaises(NotImplementedError, SubmissionHandler.can_handle)
+        self.assertRaises(
+            NotImplementedError, SubmissionHandler.can_handle, {})
 
     def test_raise_not_implemented_on_call(self):
         self.assertRaises(NotImplementedError, SubmissionHandler().__call__)
