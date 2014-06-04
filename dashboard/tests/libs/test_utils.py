@@ -70,3 +70,9 @@ class TestUtils(unittest.TestCase):
         request = testing.DummyRequest()
         result = utils.format_decimal(value, request)
         self.assertEqual(result, '0.124')
+
+    def test_format_percent(self):
+        value = 0.123632
+        request = testing.DummyRequest()
+        result = utils.format_percent(value, request)
+        self.assertEqual(result, '12.36%')
