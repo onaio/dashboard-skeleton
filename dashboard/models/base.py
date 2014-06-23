@@ -39,6 +39,9 @@ class BaseModel(object):
         DBSession.add(self)
         DBSession.flush()
 
+    def delete(cls, *criterion):
+        return DBSession.query(cls).filter(*criterion).delete()
+
 Base = declarative_base(cls=BaseModel)
 
 
