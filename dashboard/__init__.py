@@ -16,10 +16,10 @@ from dashboard.libs.utils import (
 from dashboard.security import group_finder, pwd_context
 from dashboard.models.base import (
     DBSession,
-    Base,
-    )
+    Base)
 from dashboard.libs.submission_handler import (
     submission_handler_manager)
+from dashboard.views.helpers import get_request_user
 
 
 def main(global_config, **settings):
@@ -54,6 +54,10 @@ def includeme(config):
     config.include('pyramid_jinja2')
     config.add_jinja2_search_path("dashboard:templates")
     config.commit()  # commit to allow access to jinja environment
+
+    # request methods
+    config.add_request_method(get_request_user, 'user', reify=True)
+
     config.get_jinja2_environment().filters['format_date'] = format_date
     config.get_jinja2_environment().filters['format_time'] = format_time
     config.get_jinja2_environment().filters['format_decimal'] = format_decimal

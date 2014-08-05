@@ -1,4 +1,7 @@
+from dashboard.models.user import User
 from pyramid.httpexceptions import HTTPBadRequest
+from pyramid.security import authenticated_userid
+from sqlalchemy.orm.exc import NoResultFound
 
 
 def check_post_csrf(func):
@@ -18,3 +21,11 @@ def check_post_csrf(func):
         # fall through if not POST or token is valid
         return func.__call__(context, request)
     return inner
+
+
+def get_request_user(request):
+    user_id = authenticated_userid(request)
+    try:
+        return User.get(User.id == user_id)
+    except NoResultFound:
+        return None
