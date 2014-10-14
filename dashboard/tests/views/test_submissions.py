@@ -32,7 +32,7 @@ class TestSubmissions(TestBase):
 
     def test_json_post_returns_202_on_handler_error(self):
         class ErrorSubmissionHandler(GenericSubmissionHandler):
-            def __call__(self, json_payload):
+            def __call__(self, request, json_payload):
                 raise SubmissionHandlerError()
 
         submission_handler_manager.add_handler(ErrorSubmissionHandler)

@@ -44,7 +44,7 @@ class GenericSubmissionHandler(object):
     def can_handle(json_payload):
         return True
 
-    def __call__(self, json_payload):
+    def __call__(self, request, json_payload):
         return True
 
 submission_handler_manager = SubmissionHandlerManager()

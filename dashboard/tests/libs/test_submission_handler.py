@@ -60,4 +60,4 @@ class TestGenericSubmissionHandler(unittest.TestCase):
         self.assertTrue(GenericSubmissionHandler.can_handle("anything"))
 
     def test_always_return_true_to_call(self):
-        self.assertTrue(GenericSubmissionHandler().__call__({}))
+        self.assertTrue(GenericSubmissionHandler().__call__({}, {}))

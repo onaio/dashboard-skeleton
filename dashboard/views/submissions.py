@@ -33,7 +33,7 @@ class Submissions(BaseView):
             return HTTPBadRequest(comment='Handler could not be determined')
         else:
             try:
-                handler().__call__(json_payload)
+                handler().__call__(self.request, json_payload)
             except SubmissionHandlerError:
                 return Response(
                     'Accepted pending manual matching process', status=202)
