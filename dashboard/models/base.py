@@ -5,11 +5,11 @@ from pyramid.security import (
 )
 
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm.exc import NoResultFound
 
 from sqlalchemy.orm import (
     scoped_session,
-    sessionmaker,
-    )
+    sessionmaker,)
 from sqlalchemy.sql.expression import desc
 
 from zope.sqlalchemy import ZopeTransactionExtension
@@ -42,6 +42,16 @@ class BaseModel(object):
     @classmethod
     def delete(cls, *criterion):
         return DBSession.query(cls).filter(*criterion).delete()
+
+    @classmethod
+    def get_or_create(cls, *criterion, **kwargs):
+        try:
+            instance = cls.get(*criterion)
+        except NoResultFound:
+            instance = cls(**kwargs)
+            instance.save()
+
+        return instance
 
 Base = declarative_base(cls=BaseModel)
 
